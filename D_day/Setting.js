@@ -1,7 +1,15 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
-
+import DatePicker from 'react-native-date-picker'
 export default class Setting extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      title:'',
+      date:new Date(),
+    }
+  }
+
 
   render() {
     return (
@@ -10,6 +18,9 @@ export default class Setting extends React.Component {
         <View style={styles.modal}>
           <Text style={styles.titleText}>설정</Text>
           <TextInput/>
+          <DatePicker
+          date={this.state.date}
+          mode="date"/>
           <TouchableOpacity>
             <Text style={styles.doneText}>
               완료
@@ -32,6 +43,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: '100%',
         width: '100%',
+        // a의 값은 0.5를 줘서 뒤의 배경이 비치게 해준다 
         backgroundColor: 'rgba(0,0,0,0.5)'
       },
       ddayInput: {
