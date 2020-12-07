@@ -5,15 +5,17 @@ from 'react-native';
 import Setting from './Setting.js';
 
 export default class App extends React.Component {
+  //props는 읽기전용 데이터로 이를 이용해서 부모컴포넌트의 값을 자식컴포넌트로 전달가능
 constructor(props){
   super(props);
   this.state={
     dday: new Date(),
-    ddayTitle:'크리스마스',
+    ddayTitle:'디데이',
     chatLog:[],
     settingModal:false,
   }
 }
+//세팅 톱니바퀴 버튼을 눌렀을 때, 동작할 함수
 toggleSettingModal() {
   this.setState({
     settingModal: !this.state.settingModal
@@ -23,6 +25,7 @@ toggleSettingModal() {
     return (
       <View style = {styles.container}>
         <View style = {styles.settingView}>
+          {/* onPress추가 */}
         <TouchableOpacity onPress={()=>this.toggleSettingModal()}>
           <Image source ={require('./icon/setting.png')}/>
         </TouchableOpacity>
@@ -51,7 +54,7 @@ toggleSettingModal() {
        </TouchableOpacity>
         </View>
         </View>
-        {/* 이부분이 컴포넌트 추가  */}
+        {/* 이부분이 컴포넌트 추가  삼향연산자 */}
         { this.state.settingModal ? 
           <Setting  modalHandler={()=>this.toggleSettingModal()} />  //modalHandler props추가
           : <></> }

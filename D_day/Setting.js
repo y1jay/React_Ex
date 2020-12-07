@@ -14,10 +14,19 @@ export default class Setting extends React.Component {
   render() {
     return (
     <View  style={styles.container}>
-        <TouchableOpacity style={styles.background}/>
+        <TouchableOpacity style={styles.background}
+        activeOpacity={1}
+        // TouchableOpacity를 눌렀을 때 깜빡이는 효과가 있는데 이를 해제해주는 옵션
+        // onPress추가
+        // 모달창의 바깥영역을 터치하면 모달창이닫힘
+        onPress={this.props.modalHandler}/>
         <View style={styles.modal}>
           <Text style={styles.titleText}>설정</Text>
-          <TextInput/>
+          <TextInput
+          style={styles.ddayInput}
+          value={this.state.title}
+          onChangeText={(changedText)=>{this.setState({title:changedText})}}
+          placeholder={"디데이 제목을 입력해주세요."}/>
           <DatePicker
           date={this.state.date}
           mode="date"/>
