@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
-import DatePicker from 'react-native-date-picker'
+import DatePicker from 'react-native-date-picker';
 export default class Setting extends React.Component {
   constructor(props){
     super(props);
