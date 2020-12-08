@@ -29,8 +29,10 @@ export default class Setting extends React.Component {
           placeholder={"디데이 제목을 입력해주세요."}/>
           <DatePicker
           date={this.state.date}
+          onDateChange={(date)=>{this.setState({date:date})}}
           mode="date"/>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={()=>this.props.settingHandler(this.state.title,
+            this.state.date)}>
             <Text style={styles.doneText}>
               완료
             </Text>

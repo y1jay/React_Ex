@@ -21,6 +21,33 @@ toggleSettingModal() {
     settingModal: !this.state.settingModal
   })
 }
+
+settingHandler(title, date){
+  this.setState({
+    ddayTitle:title,
+    dday:date,
+  });
+  this.toggleSettingModal();
+}
+//00년00월00일을 반환하는 함수
+makeDateString(){
+  return this.state.dday.getFullYear()+ '년'+(this.state.dday.getMonth()+1)+'월'+
+  this.state.dday.getDate()+'일';
+}
+//
+makeRemainString(){
+  const distance = new Date().getTime() - this.state.dday.getTime();
+  console.log(new Date(), this.state.dday,distance / (1000 * 60 * 60 * 24) )
+  const remain = Math.floor(distance / (1000 * 60 * 60 *24));
+  if(remain<0){
+    return 'D'+remain;
+  }else if(remain>0){
+    return'D+'+remain;
+  }else if (remain===0){
+    return 'D-Day';
+  }
+}
+
   render() {
     return (
       <View style = {styles.container}>
@@ -35,10 +62,11 @@ toggleSettingModal() {
           {this.state.ddayTitle}까지
         </Text>
         <Text style = {styles.ddayText}>
-          D-24
+          {/* 함수사용 */}
+          {this.makeRemainString()}
         </Text>
         <Text style = {styles.dateText}>
-          2020년 12월 25일
+          {this.makeDateString()}
         </Text>
         </View>
         <View style = {styles.chatView}>
@@ -56,7 +84,8 @@ toggleSettingModal() {
         </View>
         {/* 이부분이 컴포넌트 추가  삼향연산자 */}
         { this.state.settingModal ? 
-          <Setting  modalHandler={()=>this.toggleSettingModal()} />  //modalHandler props추가
+          <Setting  modalHandler={()=>this.toggleSettingModal()} //modalHandler props추가
+          settingHandler={(title,date)=>this.settingHandler(title,date)}/>  //settingHandler 추가
           : <></> }
       </View>
     );
